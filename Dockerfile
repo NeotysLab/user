@@ -18,7 +18,7 @@ ENV HATEAOS user
 ENV USER_DATABASE mongodb
 ENV MONGO_DATABASE default
 #ENV MONGO_URI mongodb://user-db-user:user-db4SockShop@user-db-shard-00-00-vvczq.mongodb.net:27017,user-db-shard-00-01-vvczq.mongodb.net:27017,user-db-shard-00-02-vvczq.mongodb.net:27017/test?ssl=true&replicaSet=user-db-shard-0&authSource=admin
-ENV MONGO_URI mongodb://user-db-svc:27017
+ENV MONGO_URI mongodb://user-db:27017
 ENV APP_PORT 8080
 
 USER ${SERVICE_USER}
