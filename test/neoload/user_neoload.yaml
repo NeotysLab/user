@@ -34,7 +34,7 @@ user_paths:
             url: /${basicpath}
             server: catalogue_host
             method: GET
-              headers:
+            headers:
               - Cache-Control: no-cache
               - Content-Type: application/json
               - json: true
@@ -49,7 +49,7 @@ user_paths:
             url: /${basicpath}
             server: catalogue_host
             method: GET
-              headers:
+            headers:
               - Cache-Control: no-cache
               - Content-Type: application/json
               - json: true
@@ -61,7 +61,7 @@ user_paths:
             url: /${customers}
             server: catalogue_host
             method: GET
-              headers:
+            headers:
               - Cache-Control: no-cache
               - Content-Type: application/json
               - json: true
@@ -73,7 +73,7 @@ user_paths:
             url: /${cards}
             server: catalogue_host
             method: GET
-              headers:
+            headers:
               - Cache-Control: no-cache
               - Content-Type: application/json
               - json: true
