@@ -1,4 +1,4 @@
-ame: catalogue_neoload
+name: user_neoload
 variables:
   constant:
   - name: basicpath

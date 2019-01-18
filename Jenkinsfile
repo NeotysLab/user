@@ -19,9 +19,9 @@ pipeline {
     OUTPUTSANITYCHECK="$WORKSPACE/infrastructure/sanitycheck.json"
     NEOLOAD_ASCODEFILE="$WORKSPACE/test/neoload/user_neoload.yaml"
     NEOLOAD_ANOMALIEDETECTIONFILE="$WORKSPACE/monspec/user_anomamlieDection.json"
-    BASICCHECKURI="/health"
-    CUSTOMERURI="/customer"
-    CARDSURI="/cards"
+    BASICCHECKURI="health"
+    CUSTOMERURI="customer"
+    CARDSURI="cards"
     GITORIGIN="neotyslab"
   }
   stages {
@@ -133,16 +133,16 @@ pipeline {
       }
       steps {
         echo "Waiting for the service to start..."
-        sleep 600
-        sh "sed -i 's/CHECK_TO_REPLACE/ ${BASICCHECKURI}'  ${NEOLOAD_ASCODEFILE}"
-        sh "sed -i 's/CUSTOMER_TO_REPLACE/ ${CUSTOMERURI}'  ${NEOLOAD_ASCODEFILE}"
-        sh "sed -i 's/CARDS_TO_REPLACE/ ${CARDSURI}'  ${NEOLOAD_ASCODEFILE}"
-        sh "sed -i 's/HOST_TO_REPLACE/ ${env.APP_NAME}.dev.svc'  ${NEOLOAD_ASCODEFILE}"
-        sh "sed -i 's/PORT_TO_REPLACE/ 80'  ${NEOLOAD_ASCODEFILE}"
-        sh "sed -i 's/DTID_TO_REPLACE/ ${DYNATRACEID}'  ${NEOLOAD_ASCODEFILE}"
-        sh "sed -i 's/APIKEY_TO_REPLACE/ ${DYNATRACEAPIKEY}'  ${NEOLOAD_ASCODEFILE}"
-        sh "sed -i 's/JSONFILE_TO_REPLACE/ ${NEOLOAD_ANOMALIEDETECTIONFILE}'  ${NEOLOAD_ASCODEFILE}"
-        sh "sed -i 's/TAGS_TO_REPLACE/ ${NL_DT_TAG}'  ${NEOLOAD_ASCODEFILE}"
+        sleep 300
+        sh "sed -i 's/CHECK_TO_REPLACE/${BASICCHECKURI}/'  ${NEOLOAD_ASCODEFILE}"
+        sh "sed -i 's/CUSTOMER_TO_REPLACE/${CUSTOMERURI}/'  ${NEOLOAD_ASCODEFILE}"
+        sh "sed -i 's/CARDS_TO_REPLACE/${CARDSURI}/'  ${NEOLOAD_ASCODEFILE}"
+        sh "sed -i 's/HOST_TO_REPLACE/${env.APP_NAME}.dev.svc/'  ${NEOLOAD_ASCODEFILE}"
+        sh "sed -i 's/PORT_TO_REPLACE/80/'  ${NEOLOAD_ASCODEFILE}"
+        sh "sed -i 's/DTID_TO_REPLACE/${DYNATRACEID}/'  ${NEOLOAD_ASCODEFILE}"
+        sh "sed -i 's/APIKEY_TO_REPLACE/${DYNATRACEAPIKEY}/'  ${NEOLOAD_ASCODEFILE}"
+        sh "sed -i 's,JSONFILE_TO_REPLACE,${NEOLOAD_ANOMALIEDETECTIONFILE},'  ${NEOLOAD_ASCODEFILE}"
+        sh "sed -i 's/TAGS_TO_REPLACE/${NL_DT_TAG}/'  ${NEOLOAD_ASCODEFILE}"
         container('neoload') {
          script {
 
@@ -183,7 +183,7 @@ pipeline {
          }
 
       }
-            }
+    }
     stage('Run functional check in dev') {
       when {
         expression {
