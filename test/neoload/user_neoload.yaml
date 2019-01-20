@@ -25,6 +25,9 @@ variables:
     name: jsonAnomalieDetectionFile
     value: JSONFILE_TO_REPLACE
 - constant:
+    name: outPutReferenceFile
+    value: OUTPUTFILE_TO_REPLACE
+- constant:
     name: TAGS
     value: TAGS_TO_REPLACE
 servers:

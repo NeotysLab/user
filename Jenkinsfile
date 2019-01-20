@@ -143,6 +143,8 @@ pipeline {
         sh "sed -i 's/APIKEY_TO_REPLACE/${DYNATRACEAPIKEY}/'  ${NEOLOAD_ASCODEFILE}"
         sh "sed -i 's,JSONFILE_TO_REPLACE,${NEOLOAD_ANOMALIEDETECTIONFILE},'  ${NEOLOAD_ASCODEFILE}"
         sh "sed -i 's/TAGS_TO_REPLACE/${NL_DT_TAG}/'  ${NEOLOAD_ASCODEFILE}"
+        sh "sed -i 's,OUTPUTFILE_TO_REPLACE,${OUTPUTSANITYCHECK},'  ${NEOLOAD_ASCODEFILE}"
+
         container('neoload') {
          script {
 
@@ -177,8 +179,8 @@ pipeline {
            withCredentials([usernamePassword(credentialsId: 'git-credentials-acm', passwordVariable: 'GIT_PASSWORD', usernameVariable: 'GIT_USERNAME')]) {
                sh "git config --global user.email ${env.GITHUB_USER_EMAIL}"
                sh "git add ${OUTPUTSANITYCHECK}"
-               sh "git commit -m 'Update Sanity_Check_${BUILD_NUMBER} ${env.APP_NAME} version ${env.VERSION}'"
-               sh "git push https://${GIT_USERNAME}:${GIT_PASSWORD}@github.com/${env.GITHUB_ORGANIZATION}/user ${GITORIGIN} master"
+           //    sh "git commit -m 'Update Sanity_Check_${BUILD_NUMBER} ${env.APP_NAME} version ${env.VERSION}'"
+             //  sh "git push https://${GIT_USERNAME}:${GIT_PASSWORD}@github.com/${env.GITHUB_ORGANIZATION}/user ${GITORIGIN} master"
            }
          }
 
@@ -194,7 +196,7 @@ pipeline {
          container('neoload') {
               script {
 
-                    status =sh(script:"/neoload/bin/NeoLoadCmd -project $WORKSPACE/test/neoload/load_template/load_template.nlp ${NEOLOAD_ASCODEFILE} -testResultName FuncCheck_User_${BUILD_NUMBER} -description FuncCheck_User_${BUILD_NUMBER} -nlweb -L CatalogueLoad=$WORKSPACE/infrastructure/infrastructure/neoload/lg/remote.txt -L Population_Dynatrace_Integration=$WORKSPACE/infrastructure/infrastructure/neoload/lg/local.txt -nlwebToken $NLAPIKEY -launch UserLoad -noGUI", returnStatus: true)
+                    status =sh(script:"/neoload/bin/NeoLoadCmd -project $WORKSPACE/test/neoload/load_template/load_template.nlp ${NEOLOAD_ASCODEFILE} -testResultName FuncCheck_User_${BUILD_NUMBER} -description FuncCheck_User_${BUILD_NUMBER} -nlweb -L UserLoad=$WORKSPACE/infrastructure/infrastructure/neoload/lg/remote.txt -L Population_Dynatrace_Integration=$WORKSPACE/infrastructure/infrastructure/neoload/lg/local.txt -nlwebToken $NLAPIKEY -launch UserLoad -noGUI", returnStatus: true)
 
                     if (status != 0) {
                               currentBuild.result = 'FAILED'
