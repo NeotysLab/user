@@ -1,1 +1,1 @@
-nl-lg-user.cicd.svc
+nl-lg-user.cicd-neotys.svc
