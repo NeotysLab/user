@@ -12,7 +12,7 @@ pipeline {
     NL_DT_TAG="app:${env.APP_NAME},environment:dev"
     OUTPUTSANITYCHECK="$WORKSPACE/infrastructure/sanitycheck.json"
     NEOLOAD_ASCODEFILE="$WORKSPACE/test/neoload/user_neoload.yaml"
-    NEOLOAD_ANOMALIEDETECTIONFILE="$WORKSPACE/monspec/user_anomamlieDection.json"
+    NEOLOAD_ANOMALIEDETECTIONFILE="$WORKSPACE/monspec/user_anomalieDection.json"
     BASICCHECKURI="health"
     CUSTOMERURI="customer"
     CARDSURI="cards"
