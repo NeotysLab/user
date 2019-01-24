@@ -12,7 +12,7 @@ pipeline {
   environment {
     APP_NAME = "user"
     ARTEFACT_ID = "sockshop-" + "${env.APP_NAME}"
-    DYNATRACEID="${env.DT_ACCOUNTID}"
+    DYNATRACEID="${env.DT_ACCOUNTID}.live.dynatrace.com"
     DYNATRACEAPIKEY="${env.DT_API_TOKEN}"
     NLAPIKEY="${env.NL_WEB_API_KEY}"
     NL_DT_TAG="app:${env.APP_NAME},environment:dev"
